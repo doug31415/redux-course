@@ -1,13 +1,30 @@
-import React from 'react';
-import TodoItem from './TodoItem';
+import React, {Component} from 'react'
+import TodoItem from './TodoItem'
+import {connect} from 'react-redux'
+import {fetchTodos} from "../reducers/todo";
 
-export default ( props ) => (
-  <div className="todo-list">
+class TodoList extends Component {
 
-    <ul>
-      {props.todos.map(
-        todo => <TodoItem key={todo.id} {...todo}/>
-      )}
-    </ul>
-  </div>
-)
+  componentDidMount() {
+    this.props.fetchTodos()
+  }
+
+  render() {
+    return (
+        <div className="todo-list">
+
+          <ul>
+            {this.props.todos.map(
+                todo => <TodoItem key={todo.id}
+                                  {...todo}/>
+            )}
+          </ul>
+        </div>
+    )
+  }
+}
+
+export default connect(
+    ( state ) => ( { todos: state.todos } ),
+    { fetchTodos }
+)( TodoList );
