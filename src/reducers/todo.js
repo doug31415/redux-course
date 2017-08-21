@@ -1,4 +1,4 @@
-import {getTodos} from "../lib/todo.service";
+import {addTodoApi, getTodosApi} from "../lib/todo.api";
 
 // initial state
 const initState = {
@@ -11,6 +11,14 @@ const TODO_ACTIONS = {
   addTodo              : 'addTodo',
   loadTodos            : 'loadTodos',
   updateCurrentTodoName: 'updateCurrentTodoName'
+};
+
+
+export const getTodosAction = ( todos ) => {
+  return {
+    type   : TODO_ACTIONS.loadTodos,
+    payload: todos
+  }
 };
 
 export const addTodoAction = ( payload ) => {
@@ -27,17 +35,20 @@ export const updateCurrentTodoNameAction = ( payload ) => {
   };
 };
 
-export const loadTodos = ( todos ) => {
-  return {
-    type   : TODO_ACTIONS.loadTodos,
-    payload: todos
+export const getTodos = () => {
+  return ( dispatch ) => {
+    getTodosApi().then(
+        ( response ) => dispatch( getTodosAction( response ) )
+    )
   }
 };
 
-export const fetchTodos = () => {
+export const addTodo = ( name ) => {
+  console.log( 'addTodo', name );
+
   return ( dispatch ) => {
-    getTodos().then(
-        ( response ) => dispatch( loadTodos( response ) )
+    addTodoApi( name ).then(
+        ( response ) => console.log( '...adding', response ) || dispatch( addTodoAction( response ) )
     )
   }
 };
@@ -47,10 +58,19 @@ export default ( state = initState, action ) => {
 
   switch( action.type ) {
 
-    case TODO_ACTIONS.addTodo:
+    case TODO_ACTIONS.loadTodos:
       newState = {
         ...state,
-        todos: state.todos.concat( [ action.payload ] )
+        todos: action.payload
+      };
+      return newState;
+
+    case TODO_ACTIONS.addTodo:
+      console.log( 'addTodo reducer' );
+      newState = {
+        ...state,
+        currentTodo: '',
+        todos      : state.todos.concat( [ action.payload ] )
       };
       return newState;
 
@@ -61,12 +81,6 @@ export default ( state = initState, action ) => {
       };
       return newState;
 
-    case TODO_ACTIONS.loadTodos:
-      newState = {
-        ...state,
-        todos: action.payload
-      };
-      return newState;
 
     default:
       return state;

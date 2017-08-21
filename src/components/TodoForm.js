@@ -1,49 +1,50 @@
-import React from 'react'
-import store from '../store'
-import {getNextId} from "../helpers/todo.helper"
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addTodoAction, updateCurrentTodoNameAction} from "../reducers/todo"
+import {updateCurrentTodoNameAction} from "../reducers/todo"
+import {addTodo} from "../reducers/todo";
 
-const TodoForm = ( props ) => {
+class TodoForm extends Component {
 
-  const { currentTodoName, updateCurrentTodoNameAction, addTodoAction } = props;
-
-  const handleInputChange = ( evt ) => {
+  handleInputChange = ( evt ) => {
     const val = evt.target.value;
-    updateCurrentTodoNameAction( val )
+    this.props.updateCurrentTodoNameAction( val )
   };
 
-  const handleSubmit = () => {
-    const state = store.getState();
+  handleSubmit = ( evt ) => {
+    //stop the return from causing a reload
+    evt.preventDefault();
 
-    const newTodo = {
-      id: getNextId( state.todos ),
-      name: state.currentTodoName,
-      isComplete: false
-    };
-
-    addTodoAction( newTodo );
-    updateCurrentTodoNameAction( '' );
+    addTodo( this.props.currentTodoName );
   };
 
-  return (
-      <form className="todo-form">
 
-        <input type="text"
-               onChange={handleInputChange}
-               value={currentTodoName}/>
+  render() {
 
-        <button type="button"
-                className={'primary button' + (!currentTodoName ? ' disabled' : '')}
-                disabled={!currentTodoName}
-                onClick={handleSubmit}>Add Todo
-        </button>
-      </form>
-  )
+    const { currentTodoName } = this.props;
+
+    return (
+        <form className="todo-form"
+              onSubmit={this.handleSubmit}>
+
+          <input type="text"
+                 onChange={this.handleInputChange}
+                 value={currentTodoName}/>
+
+          <button type="submit"
+                  className={'primary button' + (!currentTodoName ? ' disabled' : '')}
+                  disabled={!currentTodoName}>Add Todo
+          </button>
+        </form>
+    )
+  }
+
 };
 
 
 export default connect(
     ( state ) => ({ currentTodoName: state.currentTodoName }),
-    {addTodoAction, updateCurrentTodoNameAction}
+    {
+      addTodo,
+      updateCurrentTodoNameAction
+    }
 )( TodoForm );

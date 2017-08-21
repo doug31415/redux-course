@@ -1,14 +1,19 @@
 {
   "todos": [
     {
-      "id"            : 0,
-      "name"          : "The Todo",
+      "id": 0,
+      "name": "The Todo",
       "defaultChecked": false
     },
     {
-      "id"            : 1,
-      "name"          : "New Todo",
-      "defaultChecked": true
+      "name": "test",
+      "isComplete": false,
+      "id": 1
+    },
+    {
+      "name": "tests",
+      "isComplete": false,
+      "id": 2
     }
   ]
 }

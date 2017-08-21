@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import TodoItem from './TodoItem'
 import {connect} from 'react-redux'
-import {fetchTodos} from "../reducers/todo";
+import {getTodos} from "../reducers/todo";
 
 class TodoList extends Component {
 
   componentDidMount() {
-    this.props.fetchTodos()
+    this.props.getTodos()
   }
 
   render() {
@@ -26,5 +26,5 @@ class TodoList extends Component {
 
 export default connect(
     ( state ) => ( { todos: state.todos } ),
-    { fetchTodos }
+    { getTodos }
 )( TodoList );
