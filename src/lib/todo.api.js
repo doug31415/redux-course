@@ -8,8 +8,6 @@ export const getTodosApi = () => {
 };
 
 export const addTodoApi = ( name ) => {
-  console.log( 'addTodoApi' );
-
 
   const newTodo = {
     name      : name,
@@ -24,6 +22,6 @@ export const addTodoApi = ( name ) => {
     },
     body   : JSON.stringify( newTodo )
   } ).then(
-      ( response ) => console.log( '..added', response ) || response.json()
+      ( response ) =>  response.json()
   )
 };

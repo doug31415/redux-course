@@ -14,7 +14,7 @@ class TodoForm extends Component {
     //stop the return from causing a reload
     evt.preventDefault();
 
-    addTodo( this.props.currentTodoName );
+    this.props.addTodo( this.props.currentTodoName );
   };
 
 

@@ -44,11 +44,10 @@ export const getTodos = () => {
 };
 
 export const addTodo = ( name ) => {
-  console.log( 'addTodo', name );
 
   return ( dispatch ) => {
     addTodoApi( name ).then(
-        ( response ) => console.log( '...adding', response ) || dispatch( addTodoAction( response ) )
+      ( response ) => dispatch( addTodoAction( response ) )
     )
   }
 };
@@ -66,11 +65,10 @@ export default ( state = initState, action ) => {
       return newState;
 
     case TODO_ACTIONS.addTodo:
-      console.log( 'addTodo reducer' );
       newState = {
         ...state,
-        currentTodo: '',
-        todos      : state.todos.concat( [ action.payload ] )
+        currentTodoName: '',
+        todos          : state.todos.concat( [ action.payload ] )
       };
       return newState;
 
