@@ -1,4 +1,5 @@
 import {addTodoApi, getTodosApi} from "../lib/todo.api";
+import {showMessageAction} from "./messages";
 
 // initial state
 const initState = {
@@ -37,6 +38,8 @@ export const updateCurrentTodoNameAction = ( payload ) => {
 
 export const getTodos = () => {
   return ( dispatch ) => {
+    dispatch(showMessageAction('Loading Todos...'));
+
     getTodosApi().then(
         ( response ) => dispatch( getTodosAction( response ) )
     )
@@ -44,8 +47,8 @@ export const getTodos = () => {
 };
 
 export const addTodo = ( name ) => {
-
   return ( dispatch ) => {
+    dispatch(showMessageAction('Saving Todos...'));
     addTodoApi( name ).then(
       ( response ) => dispatch( addTodoAction( response ) )
     )
@@ -62,6 +65,7 @@ export default ( state = initState, action ) => {
         ...state,
         todos: action.payload
       };
+
       return newState;
 
     case TODO_ACTIONS.addTodo:
@@ -70,6 +74,7 @@ export default ( state = initState, action ) => {
         currentTodoName: '',
         todos          : state.todos.concat( [ action.payload ] )
       };
+
       return newState;
 
     case TODO_ACTIONS.updateCurrentTodoName:

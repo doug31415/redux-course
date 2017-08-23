@@ -20,7 +20,7 @@ class App extends Component {
           </div>
 
           <div className="todo-app">
-            <Message message="Test the Message"/>
+            <Message/>
             <TodoForm/>
             <TodoList/>
           </div>

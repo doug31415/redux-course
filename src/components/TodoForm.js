@@ -17,7 +17,6 @@ class TodoForm extends Component {
     this.props.addTodo( this.props.currentTodoName );
   };
 
-
   render() {
 
     const { currentTodoName } = this.props;
@@ -37,12 +36,10 @@ class TodoForm extends Component {
         </form>
     )
   }
-
-};
-
+}
 
 export default connect(
-    ( state ) => ({ currentTodoName: state.currentTodoName }),
+    ( state ) => ({ currentTodoName: state.todo.currentTodoName }),
     {
       addTodo,
       updateCurrentTodoNameAction

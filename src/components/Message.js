@@ -1,9 +1,18 @@
-import React from 'react'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 
-const Message = ( { message } ) => (
-  message
-    ? <div className="todo-list message">{message}</div>
-    : null
-);
+class Message extends Component {
 
-export default Message;
+  render() {
+    return (
+        this.props.message
+            ? <div className="todo-list message">{this.props.message}</div>
+            : null
+    )
+  }
+}
+
+
+export default connect(
+    ( state ) => ({ message: state.message })
+)( Message );
