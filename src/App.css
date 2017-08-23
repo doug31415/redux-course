@@ -20,6 +20,15 @@
   to {
     transform: rotate(360deg); } }
 
+.message {
+  background: #a1b5b2;
+  padding: .5rem;
+  margin: .5rem;
+  text-align: center;
+  color: #687aaa;
+  font-weight: bolder;
+  font-size: 1rem; }
+
 .button, button {
   border: 1px solid grey;
   border-radius: 3px; }
