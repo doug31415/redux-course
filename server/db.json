@@ -1,29 +1,14 @@
 {
   "todos": [
     {
-      "name": "Test",
-      "isComplete": false,
-      "id": 1
-    },
-    {
-      "name": "This is a Todo",
-      "isComplete": false,
-      "id": 2
-    },
-    {
-      "name": "Here is another",
+      "name": "New Todo",
       "isComplete": false,
       "id": 3
     },
     {
-      "name": "And another",
-      "isComplete": false,
+      "name": "Another Todo",
+      "isComplete": true,
       "id": 4
-    },
-    {
-      "name": "asdfasdf",
-      "isComplete": false,
-      "id": 5
     }
   ]
 }

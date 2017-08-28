@@ -76,9 +76,48 @@ $disabled-text: #c1c1c1;
 }
 
 .todo-list-item{
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: space-between;
+  align-items: center;
   width: 50%;
   border: 1px solid gray;
   background: #efefef;
   margin: .25rem;
   padding: .25rem;
+
+  &.complete {
+    color: white;
+    background: gray;
+  }
+
+  .todo-name{
+    display: flex;
+    flex: 1 1 auto;
+    text-align: left;
+    margin-left: 1rem;
+    padding: .25rem;
+  }
+
+  .delete-btn{
+
+    button{
+      background: red;
+      color: white;
+      font-weight: bold;
+      border: 1px solid darkred;
+    }
+  }
+}
+
+.footer{
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: space-around;
+  margin-top: 1rem;
+  padding: .5rem;
+
+  a{
+
+  }
 }
